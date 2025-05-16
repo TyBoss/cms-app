@@ -4,23 +4,26 @@ import _ from 'lodash'
 // import bucket from ''
 // import partials from ''
 
-const router = express.Router()
-router.get('/home', async (req, res) => {
-  const partials = {
-    header: 'partials/header',
-    footer: 'partials/footer'
-  }
-  try {
-    return res.render('index.html', {
-      partials
-    })
-  } catch (error) {
-    console.log(error)
-    return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
-  }
-})
+const routeHandler = (cms) => {
+  const router = express.Router()
+  router.get('/home', async (req, res) => {
+    const partials = {
+      header: 'partials/header',
+      footer: 'partials/footer'
+    }
+    try {
+      return res.render('index.html', {
+        partials
+      })
+    } catch (error) {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
+    }
+  })
+  return router
+}
 
-export default router
+export default routeHandler
 
 /*
 

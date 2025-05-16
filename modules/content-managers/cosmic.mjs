@@ -24,7 +24,3 @@ class CosmicJS extends ContentManagementSystem {
 }
 
 export default CosmicJS
-
-/*
-  const sdk = require('@cosmicjs/sdk')
-*/

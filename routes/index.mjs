@@ -1,5 +1,5 @@
 // Routes
-import homeRoute from './home'
+import homeRouteHandler from './home.mjs'
 
 /*module.exports = (app, config, bucket, partials, _) => {
   // require('./home')(app, config, bucket, partials, _)
@@ -11,6 +11,6 @@ import homeRoute from './home'
 
 } */
 
-export default (app) => {
-  app.use(homeRoute)
+export default (app, cms) => {
+  app.use(homeRouteHandler(cms))
 }

@@ -1,3 +1,4 @@
+import CMS_LIST from './content-manager-list.mjs'
 let instance
 
 class ContentManager {
@@ -19,10 +20,10 @@ class ContentManager {
     init (type, opts) {
         if (!this.cmsList) { throw `no list of cms provided` }
 
-        let cmstype = this.cmsList[type]
+        let create = this.cmsList[type]
         this.cms = { init: () => { throw `cms type: ${type || 'undefined' } could not be initialized `} }
-        if (cmstype) {
-            instance.cms = new cmstype(opts)
+        if (typeof create === 'function') {
+            instance.cms = create(opts)
         }
         instance.cms.init()
     }
@@ -32,4 +33,10 @@ class ContentManager {
     }
 }
 
+const getContentManager = () => {
+    return new ContentManager(CMS_LIST)
+}
+
 export default ContentManager 
+
+export { getContentManager }

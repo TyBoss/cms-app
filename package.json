@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --test --experimental-test-module-mocks --test-reporter=@voxpelli/node-test-pretty-reporter",
     "start": "cross-env NODE_ENV=production node app.js",
-    "development": "cross-env NODE_ENV=development PORT=4000 nodemon ./app.js --delay 10 -e js,html",
+    "development": "cross-env NODE_ENV=development PORT=4000 nodemon ./app.mjs --delay 2 -e js,html",
     "concat-js": "rm -f public/js/combined.js; rm -f public/js/combined.min.js; concat-cli -f public/js/* -o public/js/combined.js",
     "uglifyjs": "touch public/js/combined.min.js; uglifyjs public/js/combined.js -o public/js/combined.min.js",
     "less": "lessc public/less/main.less public/css/main.css",

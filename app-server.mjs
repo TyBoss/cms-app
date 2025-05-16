@@ -1,17 +1,26 @@
 // app-server.js
 import express from 'express'
+import path from 'path';
+import { fileURLToPath } from 'url'
 import hogan from 'hogan-express'
 import http_module from 'http'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import _ from 'lodash'
-import config from './config'
-import routeHandler from './routes'
-import { getContentManager } from './modules/content-manager'
-import { CMS_TYPES } from './modules/content-manager-types.mjs'
+import configs from './config/index.mjs'
+import routeHandler from './routes/index.mjs'
+import { getContentManager } from './modules/content-manager.mjs'
+import CMS_TYPES from './modules/content-manager-types.mjs'
+
+let config = process.env.NODE_ENV === 'development' 
+  ? configs.development 
+  : configs.production
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const cms = getContentManager()
-cms.init(CMS_TYPES.COSMIC, config)
+cms.init(CMS_TYPES.COSMIC, config.COSMIC_CMS)
 
 const app = express()
 
