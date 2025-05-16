@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{ globals.header.metadata.site_title }}</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{^ is_dev }}
+    <link rel="stylesheet" href="/css/combined.min.css" />
+  {{/ is_dev }}
+  {{# is_dev }}
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/css-helpers.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  {{/ is_dev }}
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <meta name="description" content="{{ page.metadata.seo_description }}">
+  <link rel="icon" type="image/png" href="{{ globals.header.metadata.fav_icon.imgix_url }}?w=16,32" sizes="16x16 32x32" />
+</head>
+<body>
+<header id="header">
+  <div class="container pt-10 pb-5 text-center h-80">
+    <a href="/">
+      <img class="w-200" src="{{ globals.header.metadata.logo.imgix_url }}?w=400">
+    </a>
+  </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      {{# globals.nav.metadata }}
+        {{^ routes.length }}
+          <p>No routes available</p>
+        {{/ routes.length }}
+        {{# routes.length }}
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{ title }} <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {{# routes }}
+                      <li><a href="{{ value }}">{{ title }}</a></li>
+                    {{/ routes }}
+                  </ul>
+                </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        {{/ routes.length }}
+    {{/ globals.nav.metadata }}
+  </nav>
+</header>

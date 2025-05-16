@@ -1,0 +1,3 @@
+class WordPress extends ContentManagementSystem {
+
+}
