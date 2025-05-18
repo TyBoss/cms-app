@@ -24,10 +24,20 @@ describe('ContactManager test', () => {
                 testCallback(opts)
             }
         }
+
         ContentManager.resetInstance()
-        const contentManager = new ContentManager({ [TYPES.COSMIC]: TestManagementSystem })
+        const contentManager = new ContentManager({ [TYPES.COSMIC]: (opts) => new TestManagementSystem(opts) })
         contentManager.init(TYPES.COSMIC, { key: 'test-key', write: true })
         assert.strictEqual(testCallback.mock.callCount(), 1);
+    })
+
+    it('init will throw if cms has no create function', () => {
+        const contentManager = new ContentManager({ [TYPES.COSMIC]: {}  })
+        let blah = `value of cms type: "${TYPES.COSMIC}" must be a function that instantiates the cms`
+        assert.throws(
+            () => contentManager.init(TYPES.COSMIC, { key: 'test-key', write: true }),
+            new RegExp(blah),
+        )
     })
 })
 

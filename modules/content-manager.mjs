@@ -24,8 +24,9 @@ class ContentManager {
         this.cms = { init: () => { throw `cms type: ${type || 'undefined' } could not be initialized `} }
         if (typeof create === 'function') {
             instance.cms = create(opts)
+            return instance.cms.init()
         }
-        instance.cms.init()
+        throw `value of cms type: "${type}" must be a function that instantiates the cms`
     }
 
     getPageById(id) {
